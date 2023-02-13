@@ -17,6 +17,7 @@ During the development of this project, the following techologies were used:
 - [Go](https://go.dev/)
 - [Docker](https://www.docker.com/)
 - [golang-migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
+- [sqlc](https://sqlc.dev/)
 - [gorilla/mux](https://github.com/gorilla/mux)
 
 ## 💻 Project Configuration
@@ -28,6 +29,7 @@ During the development of this project, the following techologies were used:
 - [scoop](https://scoop.sh/) for Windows or [Homebrew](https://brew.sh/) for Mac
 - [migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
 - [choco](https://chocolatey.org/install) and [choco install make](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows) for Windows
+- [sqlc](https://docs.sqlc.dev/en/stable/overview/install.html) (for WIndows, we'll use it on a Docker image)
 
 ### Setting up infrastructure:
 
@@ -55,6 +57,7 @@ In order to deploy the application to the kubernetes cluster ...
 * [A Tour of Go](https://go.dev/tour/welcome/1)
 * [postgres | Docker Hub](https://hub.docker.com/_/postgres)
 * [How to run a makefile in Windows?](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows)
+* [Docker tries to mkdir the folder that I mount](https://stackoverflow.com/questions/50817985/docker-tries-to-mkdir-the-folder-that-i-mount)
 
 ## 📄 License
 
