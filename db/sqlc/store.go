@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-// Store provides all functions to execute db queries and transactions
+// Store defines all functions to execute db queries and transactions
 type Store interface {
 	Querier
 	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
