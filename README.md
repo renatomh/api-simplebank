@@ -17,6 +17,7 @@ During the development of this project, the following techologies were used:
 - [Go](https://go.dev/)
 - [Gin Web Framework](https://github.com/gin-gonic/gin)
 - [Viper](https://github.com/spf13/viper)
+- [gomock](https://github.com/golang/mock)
 - [Docker](https://www.docker.com/)
 - [golang-migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
 - [sqlc](https://sqlc.dev/)
