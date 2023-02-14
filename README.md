@@ -15,6 +15,7 @@ This project was developed while studying Go, Docker and Kubernetes. It aims to 
 During the development of this project, the following techologies were used:
 
 - [Go](https://go.dev/)
+- [Gin Web Framework](https://github.com/gin-gonic/gin)
 - [Docker](https://www.docker.com/)
 - [golang-migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
 - [sqlc](https://sqlc.dev/)
@@ -47,7 +48,11 @@ $ make migrateup
 
 ## ⏯️ Running
 
-To run the application ...
+To run the application locally, you can use the following command:
+
+```bash
+$ make server
+```
 
 ## 🔨 Project's *Deploy*
 
