@@ -12,9 +12,11 @@ import (
 
 // Function to be used during the tests
 func createRandomAccount(t *testing.T) Account {
+	user := createRandomUser(t)
+
 	// Setting up data to be used during the account's creation
 	arg := CreateAccountParams{
-		Owner:    util.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
 	}
