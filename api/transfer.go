@@ -2,10 +2,12 @@ package api
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"net/http"
 
 	db "simplebank/db/sqlc"
+	"simplebank/token"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,17 +19,17 @@ type transferRequest struct {
 	Currency      string `json:"currency" binding:"required,currency"`
 }
 
-func (server *Server) validAccountCurrency(ctx *gin.Context, accountID int64, currency string) bool {
+func (server *Server) validAccountCurrency(ctx *gin.Context, accountID int64, currency string) (db.Account, bool) {
 	// Getting the account by the provided ID
 	account, err := server.store.GetAccount(ctx, accountID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
-			return false
+			return account, false
 		}
 
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return false
+		return account, false
 	}
 
 	// Checking if currency matches
@@ -35,10 +37,10 @@ func (server *Server) validAccountCurrency(ctx *gin.Context, accountID int64, cu
 		err := fmt.Errorf("account [%d] currency mismatch: %s vs %s", account.ID, account.Currency, currency)
 		// Sending error response to the client
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return false
+		return account, false
 	}
 
-	return true
+	return account, true
 }
 
 func (server *Server) createTransfer(ctx *gin.Context) {
@@ -50,10 +52,21 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 	}
 
 	// Checking if accounts have the required currency
-	if !server.validAccountCurrency(ctx, req.FromAccountID, req.Currency) {
+	fromAccount, valid := server.validAccountCurrency(ctx, req.FromAccountID, req.Currency)
+	if !valid {
 		return
 	}
-	if !server.validAccountCurrency(ctx, req.ToAccountID, req.Currency) {
+
+	// Getting the user which made the request
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if fromAccount.Owner != authPayload.Username {
+		err := errors.New("origin account doesn't belong to the authenticated user")
+		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		return
+	}
+
+	_, valid = server.validAccountCurrency(ctx, req.ToAccountID, req.Currency)
+	if !valid {
 		return
 	}
 

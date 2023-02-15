@@ -100,25 +100,28 @@ func TestDeleteAccount(t *testing.T) {
 }
 
 func TestListAccounts(t *testing.T) {
+	var lastAccount Account
 	// First, we create random accounts
 	for i := 0; i < 10; i++ {
-		createRandomAccount(t)
+		lastAccount = createRandomAccount(t)
 	}
 
 	// Defining pagination settings
 	arg := ListAccountsParams{
+		Owner:  lastAccount.Owner,
 		Limit:  5,
-		Offset: 5,
+		Offset: 0,
 	}
 
 	accounts, err := testQueries.ListAccounts(context.Background(), arg)
 	// In order for the tests to pass, there should be no errors
 	require.NoError(t, err)
-	// And 5 items must be returned
-	require.Len(t, accounts, 5)
+	// List should not be empty
+	require.NotEmpty(t, accounts)
 
 	// Also, no account should be empty
 	for _, account := range accounts {
 		require.NotEmpty(t, account)
+		require.Equal(t, lastAccount.Owner, account.Owner)
 	}
 }
