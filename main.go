@@ -26,7 +26,10 @@ func main() {
 	// Creating the repository with the database connection
 	store := db.NewStore(conn)
 	// Starting the API with the 'store' object
-	server := api.NewServer(store)
+	server, err := api.NewServer(config, store)
+	if err != nil {
+		log.Fatal("cannot create server:", err)
+	}
 
 	err = server.Start(config.ServerAddress)
 	if err != nil {
