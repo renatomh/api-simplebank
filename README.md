@@ -46,7 +46,17 @@ $ make migrateup
 
 ## 🌐 Setting up config files
 
-...
+In order to build docker iamges from a Dockerfile, we can do it with the following command (if we already have a *Dockerfile* on the directory where the commnd is being executed):
+
+```bash
+$ docker build -t simplebank:latest .
+```
+
+We can create docker networks with the following command:
+
+```bash
+$ docker network create bank-network
+```
 
 ## ⏯️ Running
 
