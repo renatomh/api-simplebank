@@ -52,6 +52,12 @@ In order to build docker iamges from a Dockerfile, we can do it with the followi
 $ docker build -t simplebank:latest .
 ```
 
+We can create docker networks with the following command:
+
+```bash
+$ docker network create bank-network
+```
+
 ## ⏯️ Running
 
 To run the application locally, you can use the following command:
