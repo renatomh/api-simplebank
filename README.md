@@ -75,6 +75,7 @@ In order to deploy the application to the kubernetes cluster ...
 * [postgres | Docker Hub](https://hub.docker.com/_/postgres)
 * [How to run a makefile in Windows?](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows)
 * [Docker tries to mkdir the folder that I mount](https://stackoverflow.com/questions/50817985/docker-tries-to-mkdir-the-folder-that-i-mount)
+* [NGINX Ingress Controller - Installation Guide # AWS](https://kubernetes.github.io/ingress-nginx/deploy/#aws)
 
 ## 📄 License
 
