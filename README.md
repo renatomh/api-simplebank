@@ -8,7 +8,8 @@ This project was developed while studying Go, Docker and Kubernetes. It aims to 
 
 ## 🔍 Features
 
-* 
+* Create new accounts with differente currencies;
+* Transfer money from your accounts to another ones;
 
 ## 🛠 Technologies
 
