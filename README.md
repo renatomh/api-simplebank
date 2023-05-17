@@ -49,6 +49,14 @@ $ make migrateup
 
 **Important Observation**: the files which will be copied to the Docker image being built must have the End of Line (EOL) sequence as 'LF' (Line Feed). If it's set to 'CRLF' (Carriage Return + Line Feed), it might cause some errors like "*exec /app/start.sh: no such file or directory*" or "*error: parse "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable\r": net/url: invalid control character in URL*".
 
+At least, these files should have the EOL set as 'LF':
+- [app.env](app.env)
+- [docker-compose.yaml](docker-compose.yaml)
+- [Dockerfile](Dockerfile)
+- [Makefile](Makefile)
+- [start.sh](start.sh)
+- [wait-for.sh](wait-for.sh)
+
 In order to build docker images from a Dockerfile, we can do it with the following command (if we already have a *Dockerfile* on the directory where the command is being executed):
 
 ```bash
