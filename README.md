@@ -37,7 +37,7 @@ During the development of this project, the following techologies were used:
 
 ### Setting up infrastructure:
 
-Start postgres container, creating database and running database migration up all versions:
+Starting postgres container, creating database and running database migration up all versions:
 
 ```bash
 $ make postgres
@@ -47,7 +47,9 @@ $ make migrateup
 
 ## 🌐 Setting up config files
 
-In order to build docker iamges from a Dockerfile, we can do it with the following command (if we already have a *Dockerfile* on the directory where the commnd is being executed):
+**Important Observation**: the files which will be copied to the Docker image being built must have the End of Line (EOL) sequence as 'LF' (Line Feed). If it's set to 'CRLF' (Carriage Return + Line Feed), it might cause some errors like "*exec /app/start.sh: no such file or directory*" or "*error: parse "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable\r": net/url: invalid control character in URL*".
+
+In order to build docker images from a Dockerfile, we can do it with the following command (if we already have a *Dockerfile* on the directory where the command is being executed):
 
 ```bash
 $ docker build -t simplebank:latest .
@@ -57,6 +59,12 @@ We can create docker networks with the following command:
 
 ```bash
 $ docker network create bank-network
+```
+
+To setup images from the [docker-compose](docker-compose.yaml), first we need to update the [app.env](app.env) file setting the apropriated 'DB_SOURCE' host (e.g.: changing the '*@localhost*' part of the string to '*@postgres*'). Then, we can use the command:
+
+```bash
+$ docker compose up
 ```
 
 ## ⏯️ Running
