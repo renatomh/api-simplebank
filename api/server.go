@@ -57,6 +57,10 @@ func (server *Server) setupRouter() {
 
 	authRoutes.POST("/transfers", server.createTransfer)
 
+	authRoutes.POST("/deposits", server.createDeposit)
+	authRoutes.GET("/deposits/:id", server.getDeposit)
+	authRoutes.GET("/deposits", server.listDeposits)
+
 	server.router = router
 }
 

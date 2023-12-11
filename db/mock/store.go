@@ -65,6 +65,21 @@ func (mr *MockStoreMockRecorder) CreateAccount(arg0, arg1 interface{}) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAccount", reflect.TypeOf((*MockStore)(nil).CreateAccount), arg0, arg1)
 }
 
+// CreateDeposit mocks base method.
+func (m *MockStore) CreateDeposit(arg0 context.Context, arg1 db.CreateDepositParams) (db.Deposit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateDeposit", arg0, arg1)
+	ret0, _ := ret[0].(db.Deposit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateDeposit indicates an expected call of CreateDeposit.
+func (mr *MockStoreMockRecorder) CreateDeposit(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateDeposit", reflect.TypeOf((*MockStore)(nil).CreateDeposit), arg0, arg1)
+}
+
 // CreateEntry mocks base method.
 func (m *MockStore) CreateEntry(arg0 context.Context, arg1 db.CreateEntryParams) (db.Entry, error) {
 	m.ctrl.T.Helper()
@@ -110,6 +125,21 @@ func (mr *MockStoreMockRecorder) CreateUser(arg0, arg1 interface{}) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*MockStore)(nil).CreateUser), arg0, arg1)
 }
 
+// CreateWithdraw mocks base method.
+func (m *MockStore) CreateWithdraw(arg0 context.Context, arg1 db.CreateWithdrawParams) (db.Withdraw, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateWithdraw", arg0, arg1)
+	ret0, _ := ret[0].(db.Withdraw)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateWithdraw indicates an expected call of CreateWithdraw.
+func (mr *MockStoreMockRecorder) CreateWithdraw(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateWithdraw", reflect.TypeOf((*MockStore)(nil).CreateWithdraw), arg0, arg1)
+}
+
 // DeleteAccount mocks base method.
 func (m *MockStore) DeleteAccount(arg0 context.Context, arg1 int64) error {
 	m.ctrl.T.Helper()
@@ -122,6 +152,21 @@ func (m *MockStore) DeleteAccount(arg0 context.Context, arg1 int64) error {
 func (mr *MockStoreMockRecorder) DeleteAccount(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAccount", reflect.TypeOf((*MockStore)(nil).DeleteAccount), arg0, arg1)
+}
+
+// DepositTx mocks base method.
+func (m *MockStore) DepositTx(arg0 context.Context, arg1 db.DepositTxParams) (db.DepositTxResult, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DepositTx", arg0, arg1)
+	ret0, _ := ret[0].(db.DepositTxResult)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DepositTx indicates an expected call of DepositTx.
+func (mr *MockStoreMockRecorder) DepositTx(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DepositTx", reflect.TypeOf((*MockStore)(nil).DepositTx), arg0, arg1)
 }
 
 // GetAccount mocks base method.
@@ -152,6 +197,21 @@ func (m *MockStore) GetAccountForUpdate(arg0 context.Context, arg1 int64) (db.Ac
 func (mr *MockStoreMockRecorder) GetAccountForUpdate(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAccountForUpdate", reflect.TypeOf((*MockStore)(nil).GetAccountForUpdate), arg0, arg1)
+}
+
+// GetDeposit mocks base method.
+func (m *MockStore) GetDeposit(arg0 context.Context, arg1 int64) (db.Deposit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetDeposit", arg0, arg1)
+	ret0, _ := ret[0].(db.Deposit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetDeposit indicates an expected call of GetDeposit.
+func (mr *MockStoreMockRecorder) GetDeposit(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetDeposit", reflect.TypeOf((*MockStore)(nil).GetDeposit), arg0, arg1)
 }
 
 // GetEntry mocks base method.
@@ -199,6 +259,21 @@ func (mr *MockStoreMockRecorder) GetUser(arg0, arg1 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUser", reflect.TypeOf((*MockStore)(nil).GetUser), arg0, arg1)
 }
 
+// Getwithdraw mocks base method.
+func (m *MockStore) Getwithdraw(arg0 context.Context, arg1 int64) (db.Withdraw, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Getwithdraw", arg0, arg1)
+	ret0, _ := ret[0].(db.Withdraw)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Getwithdraw indicates an expected call of Getwithdraw.
+func (mr *MockStoreMockRecorder) Getwithdraw(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Getwithdraw", reflect.TypeOf((*MockStore)(nil).Getwithdraw), arg0, arg1)
+}
+
 // ListAccounts mocks base method.
 func (m *MockStore) ListAccounts(arg0 context.Context, arg1 db.ListAccountsParams) ([]db.Account, error) {
 	m.ctrl.T.Helper()
@@ -212,6 +287,21 @@ func (m *MockStore) ListAccounts(arg0 context.Context, arg1 db.ListAccountsParam
 func (mr *MockStoreMockRecorder) ListAccounts(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAccounts", reflect.TypeOf((*MockStore)(nil).ListAccounts), arg0, arg1)
+}
+
+// ListDeposits mocks base method.
+func (m *MockStore) ListDeposits(arg0 context.Context, arg1 db.ListDepositsParams) ([]db.Deposit, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListDeposits", arg0, arg1)
+	ret0, _ := ret[0].([]db.Deposit)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListDeposits indicates an expected call of ListDeposits.
+func (mr *MockStoreMockRecorder) ListDeposits(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListDeposits", reflect.TypeOf((*MockStore)(nil).ListDeposits), arg0, arg1)
 }
 
 // ListEntries mocks base method.
@@ -242,6 +332,21 @@ func (m *MockStore) ListTransfers(arg0 context.Context, arg1 db.ListTransfersPar
 func (mr *MockStoreMockRecorder) ListTransfers(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListTransfers", reflect.TypeOf((*MockStore)(nil).ListTransfers), arg0, arg1)
+}
+
+// ListWithdraws mocks base method.
+func (m *MockStore) ListWithdraws(arg0 context.Context, arg1 db.ListWithdrawsParams) ([]db.Withdraw, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListWithdraws", arg0, arg1)
+	ret0, _ := ret[0].([]db.Withdraw)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListWithdraws indicates an expected call of ListWithdraws.
+func (mr *MockStoreMockRecorder) ListWithdraws(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListWithdraws", reflect.TypeOf((*MockStore)(nil).ListWithdraws), arg0, arg1)
 }
 
 // TransferTx mocks base method.

@@ -10,6 +10,7 @@ import (
 type Store interface {
 	Querier
 	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
+	DepositTx(ctx context.Context, arg DepositTxParams) (DepositTxResult, error)
 }
 
 // SQLStore provides all functions to execute SQL queries and transactions
@@ -64,6 +65,19 @@ type TransferTxResult struct {
 	ToEntry     Entry    `json:"to_entry"`
 }
 
+// DepositTxParams contains the input parameters of the deposit transaction
+type DepositTxParams struct {
+	AccountID int64  `json:"account_id"`
+	Amount    int64  `json:"amount"`
+	User      string `json:"user"`
+}
+
+// DepositTxResult is the result of the deposit transaction
+type DepositTxResult struct {
+	Deposit Deposit `json:"deposit"`
+	Entry   Entry   `json:"entry"`
+}
+
 // TransferTx performs a money transfer from one account to the other.
 // It creates the transfer, add account entries, and update accounts' balance within a database transaction
 func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
@@ -113,6 +127,48 @@ func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (Tr
 				arg.Amount, // money is moving in
 				arg.FromAccountID, -arg.Amount,
 			)
+		}
+
+		return err
+	})
+
+	return result, err
+}
+
+// DepositTo performs a money deposit to one account.
+// It creates the deposit, add account entries, and update accounts' balance within a database transaction
+func (store *SQLStore) DepositTx(ctx context.Context, arg DepositTxParams) (DepositTxResult, error) {
+	var result DepositTxResult
+
+	err := store.execTx(ctx, func(q *Queries) error {
+		var err error
+
+		// Creating deposit object
+		result.Deposit, err = q.CreateDeposit(ctx, CreateDepositParams{
+			AccountID: arg.AccountID,
+			Amount:    arg.Amount,
+			User:      arg.User,
+		})
+		if err != nil {
+			return err
+		}
+
+		// Creating account entry object
+		result.Entry, err = q.CreateEntry(ctx, CreateEntryParams{
+			AccountID: arg.AccountID,
+			Amount:    arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
+
+		// Updating account balance
+		_, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
+			ID:     arg.AccountID,
+			Amount: arg.Amount,
+		})
+		if err != nil {
+			return err
 		}
 
 		return err
