@@ -10,6 +10,7 @@ This project was developed while studying Go, Docker and Kubernetes. It aims to 
 
 * Create new accounts with different currencies;
 * Transfer money from your accounts to another ones;
+* Refresh tokens;
 
 ## 🛠 Technologies
 
@@ -73,6 +74,12 @@ To setup images from the [docker-compose](docker-compose.yaml), first we need to
 
 ```bash
 $ docker compose up
+```
+
+If new database migrations need to be created, the following command can be used (you must replace *<migration_name>* with the actual description for the migration):
+
+```bash
+$ migrate create -ext sql -dir db/migration -seq <migration_name>
 ```
 
 ## ⏯️ Running
