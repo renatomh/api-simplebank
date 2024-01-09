@@ -1,6 +1,3 @@
-*.log
-.vscode
-
 # Terraform files
 .terraform/
 terraform.tfstate

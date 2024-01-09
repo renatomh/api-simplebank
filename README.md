@@ -90,7 +90,7 @@ To run the application locally, you can use the following command:
 $ make server
 ```
 
-## Documentation
+## Database Documentation
 
 To create the database docs, we're using [dbdocs.io](https://dbdocs.io/), you need Node and NPM installed, in order to install it on your machine. To install it, run the following command:
 
@@ -131,6 +131,29 @@ $ dbml2sql --postgres -o doc/schema.sql doc/db.dbml
 ## 🔨 Project's *Deploy*
 
 In order to deploy the application to the kubernetes cluster ...
+
+## 🏗️ Infrastructure as Code (IaC) with Terraform
+
+To make it easier to provision infrastructure on cloud providers, you can make use of the [Terraform template](main.tf) provided.
+
+First, you'll need to [install Terraform](https://developer.hashicorp.com/terraform/downloads) on your machine; then, since we're using AWS for the specified resources, you'll need to install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) as well.
+
+After that, you must set up an IAM user with permissions to manage resources, create an access key for the new user and configure the AWS CLI with the following command (entering the access key ID, secret access key, default region and outout format):
+
+```bash
+$ aws configure
+```
+
+Once these steps are done, you can use the Terraform commands to create, update and delete resources.
+
+```bash
+$ terraform init # Downloads the necessary provider plugins and set up the working directory
+$ terraform plan # Creates the execution plan for the resources
+$ terraform apply # Executes the actions proposed in a Terraform plan
+$ terraform destroy # Destroys all remote objects managed by a particular Terraform configuration
+```
+
+If you want to provide the required variables for Terraform automatically when executing the script, you can create a file called *prod.auto.tfvars* file on the root directory, with all needed variables, according to the sample provided ([auto.tfvars](auto.tfvars)).
 
 ### Documentation:
 * [A Tour of Go](https://go.dev/tour/welcome/1)
