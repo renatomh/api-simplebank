@@ -108,3 +108,24 @@ resource "aws_db_instance" "rds" {
   # Adding the security group to the instance
   vpc_security_group_ids = [aws_security_group.security_group.id]
 }
+
+# Creating the secrets
+resource "aws_secretsmanager_secret" "env_secret" {
+  name        = "simple_bank"
+  description = "Environment variables and secrets for Simple Bank"
+}
+
+# Defining the fields and values for the secrets
+resource "aws_secretsmanager_secret_version" "env_secret_version" {
+  secret_id     = aws_secretsmanager_secret.env_secret.id
+  secret_string = <<EOT
+{
+  "DB_DRIVER": "postgres",
+  "DB_SOURCE": "postgresql://root:${var.db_password}@${aws_db_instance.rds.endpoint}:5432/simple_bank?sslmode=disable",
+  "SERVER_ADDRESS": "0.0.0.0:8080",
+  "TOKEN_SYMMETRIC_KEY": "34984392010eaaac519278b232d94506224de14db0c4d5d77af8499d1b4e8f5c8375d457aeee187d75cb11305c3a2cea31723ea03aba5bd910967a335d8dcfed",
+  "ACCESS_TOKEN_DURATION": "15m",
+  "REFRESH_TOKEN_DURATION": "24h"
+}
+EOT
+}
