@@ -90,6 +90,44 @@ To run the application locally, you can use the following command:
 $ make server
 ```
 
+## Documentation
+
+To create the database docs, we're using [dbdocs.io](https://dbdocs.io/), you need Node and NPM installed, in order to install it on your machine. To install it, run the following command:
+
+```bash
+$ npm install -g dbdocs
+```
+
+Then, login to dbdocs with the command below:
+
+```bash
+$ dbdocs login
+```
+
+And now you can build the documentation providing the docs .dbml file for it, like seen in the example below (adjust the path for your .dbml file). The URL for the documentation will be displayed after the build is complete.
+
+```bash
+$ dbdocs build doc/db.dbml
+```
+
+You can also protect the documentation page setting a password for it. The following command achieves this (update *\<password\>* with your actual password):
+
+```bash
+$ dbdocs password --set <password> --project simple_bank
+```
+
+We can also use a tool to generate SQL schema from .dmbl files. First, we install the tool via:
+
+```bash
+$ npm install -g @dbml/cli
+```
+
+Then, we use the command below to output the schema file (updating the output and input file paths):
+
+```bash
+$ dbml2sql --postgres -o doc/schema.sql doc/db.dbml
+```
+
 ## 🔨 Project's *Deploy*
 
 In order to deploy the application to the kubernetes cluster ...
@@ -101,6 +139,7 @@ In order to deploy the application to the kubernetes cluster ...
 * [Docker tries to mkdir the folder that I mount](https://stackoverflow.com/questions/50817985/docker-tries-to-mkdir-the-folder-that-i-mount)
 * [NGINX Ingress Controller - Installation Guide # AWS](https://kubernetes.github.io/ingress-nginx/deploy/#aws)
 * [Docker for Windows: Dealing With Windows Line Endings](https://willi.am/blog/2016/08/11/docker-for-windows-dealing-with-windows-line-endings/)
+* [dbdocs.io Quickstart Guide](https://dbdocs.io/docs)
 
 ## 📄 License
 
